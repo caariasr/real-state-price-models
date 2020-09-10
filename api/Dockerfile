@@ -5,4 +5,4 @@ WORKDIR /api
 RUN pip install --upgrade pip
 RUN pip install --use-feature=2020-resolver -r requirements.txt
 ENV FLASK_APP=api.py
-CMD ["flas", "run", "--host", "0.0.0.0"]
+CMD ["flask", "run", "--host", "0.0.0.0"]
