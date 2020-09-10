@@ -4,5 +4,5 @@ COPY . /api
 WORKDIR /api
 RUN pip install --upgrade pip
 RUN pip install --use-feature=2020-resolver -r requirements.txt
-ENTRYPOINT ["python"]
-CMD ["api.py"]
+ENV FLASK_APP=api.py
+CMD ["flas", "run", "--host", "0.0.0.0"]

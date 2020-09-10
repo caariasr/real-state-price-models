@@ -6,6 +6,14 @@ import pandas as pd
 
 def add_extra_features(data):
     # add the valid period in months
+    numeric_vars = [
+        'offering_type_id', 'bedroom_id', 'property_sqft',
+        'property_cheques', 'coordinates_lat', 'coordinates_lon'
+    ]
+    data[numeric_vars] = data[numeric_vars].astype('float')
+    data['meta_valid_from_dts'] = pd.to_datetime(data['meta_valid_from_dts'])
+    data['meta_valid_to_dts'] = pd.to_datetime(data['meta_valid_to_dts'])
+    data['property_log_sqft'] = np.log(data['property_sqft'])
     data['valid_period'] = (
             data['meta_valid_to_dts'] -
             data['meta_valid_from_dts']
@@ -23,6 +31,8 @@ def add_extra_features(data):
          (data.meta_valid_from_dts < '2018-10-30')),
         ((data.meta_valid_from_dts >= '2018-10-30') &
          (data.meta_valid_from_dts < '2018-10-31')),
+        ((data.meta_valid_from_dts >= '2018-10-31') &
+         (data.meta_valid_from_dts < '2018-11-01'))
     ]
     choice_list = [
         'before_oct_27th_2018',
@@ -30,13 +40,18 @@ def add_extra_features(data):
         'oct_28th_2018',
         'oct_29th_2018',
         'oct_30th_2018',
+        'oct_31th_2018'
     ]
     data['ts_groups_from'] = np.select(
-        cond_list, choice_list, default='oct_31th_2018')
+        cond_list, choice_list)
     new_vars = pd.get_dummies(data.ts_groups_from)
+    choice = list(new_vars.columns)[0]
+    for grp in choice_list:
+        if grp != choice:
+            new_vars[grp] = 0
     data = data.join(new_vars)
     # distance features
-    poi_df = pd.read_csv("static/poi.csv")
+    poi_df = pd.read_csv("static/csv/poi.csv")
     data['metro_poi'] = nearest_poi(
         data, poi_df, 'Metro')
     data['tram_poi'] = nearest_poi(
@@ -47,9 +62,10 @@ def add_extra_features(data):
         'offering_type_id',
         'bedroom_id',
         'bathroom_id',
-        'property_sqft',
+        'property_log_sqft',
         'property_cheques',
-        'valid_period',
+        'valid_period'
+    ] + choice_list + [
         'metro_poi',
         'tram_poi'
     ] + list(new_att.columns)

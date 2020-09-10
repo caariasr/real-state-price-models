@@ -4,24 +4,24 @@ from keras.layers import LeakyReLU
 from keras.optimizers import Adam
 
 
-def bl_nn(x_matrix):
+def bl_nn():
     optimizer = Adam(0.0001)
     model = Sequential()
     model.add(
         Dense(
-            x_matrix.shape[1] * 20,
-            input_dim=x_matrix.shape[1],
+            660,
+            input_dim=33,
             kernel_initializer='normal')
     )
     model.add(LeakyReLU())
     model.add(
         Dense(
-            x_matrix.shape[1] * 20,
+            660,
             kernel_initializer='normal')
     )
     model.add(LeakyReLU())
     model.add(
-        Dense(x_matrix.shape[1] * 20,
+        Dense(660,
               kernel_initializer='normal')
     )
     model.add(LeakyReLU())
