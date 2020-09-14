@@ -1,7 +1,7 @@
 # real-state-price-models
 This is a simple approach Automated Price Valuation (AVM) for sale and rent apartments and classification for whether the apartment will be transacted after a month
 The AVM serves predictions through a simple docker-flask API.
-The instructions to test the API are [here](/api/README.md)
+The instructions to test the API are [here](/api/README.md).
 
 ## Results (High Level)
 
@@ -15,8 +15,8 @@ website. To predict the property price, I used different  attributes about the
  The final model for the AVM is a Neural Network. In order to validate the
  results, I removed 30% of the provided listings from the model
  completely. After I trained and tuned the model I
- predicted the price for the hidden listings. In the following chart you
- can see the comparison for each listing's predicted value (x-axis) with
+ predicted the logarithm of the price for the hidden listings. In the following
+ chart you can see the comparison for each listing's predicted value (x-axis) with
  respect to its actual value (y-axis).
   
 ![Predicted vs Actual Plot](/api/static/png/pred_vs_act.png)
@@ -28,7 +28,7 @@ Other meaningful metrics of the model performance:
 3. RMSE listings for rent: 46,080 AED
 
 For comparison of performance between sale and rent listings is better to use
-the Mean Absolute Percentage Error (MAPE)
+the Mean Absolute Percentage Error (MAPE):
 
 1. MAPE for all listings: 17.94 %
 2. MAPE listings on sale: 16.86 %
