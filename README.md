@@ -33,19 +33,3 @@ the Mean Absolute Percentage Error (MAPE):
 1. MAPE for all listings: 17.94 %
 2. MAPE listings on sale: 16.86 %
 3. MAPE listings for rent: 19.15 %
-
-
-The model is just a rudimentary approach at can be further improved.
-Also, I would do a fuller analysis on the features and extreme values that
-perhaps doesn't make sense and can be either corrected or removed. Finally,
-property finder includes many other useful information like amenities that
-could also improve the performance of the model. Finally, any other
-additional external features could also improve the performance: Quality of
-reads in the neighbor, schools nearby, quality of air, etc.
-
-In terms of the API for the AVM. If this API would serve a user-friendly
-application I would make some changes in terms of the features I can use for
-the model. For example the date when the listings stopped being valid is
-more likely not going to be possible to use in this scenario. For the
-coordinates you could ask the user specific neighbors and use the average
-coordinates. 
